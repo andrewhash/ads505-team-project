@@ -42,18 +42,6 @@ Superhost listings averaged $382.51/night vs. $311.70 for non-superhosts (Welch'
 
 The random forest model was selected as the final model: it explains about 68% of price variation and cuts average pricing error by roughly 14% versus the linear regression baseline.
 
-## Repository structure
-
-> Update this section to match the actual folders/notebooks in the repo.
-
-\`\`\`
-ads505-team-project/
-├── data/              # raw and cleaned listings data
-├── notebooks/          # EDA, cleaning, and modeling notebooks
-├── reports/            # final deliverables (technical report, executive brief, slides)
-└── README.md
-\`\`\`
-
 ## Reports
 
 - Technical report: for reproducing the analysis
