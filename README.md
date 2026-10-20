@@ -61,10 +61,6 @@ Superhost listings averaged $382.51/night vs. $311.70 for non-superhosts (Welch'
 
 The random forest was selected as the final model. It explains about 68% of price variation and cuts average pricing error by roughly 14% compared to the linear regression baseline.
 
-## Reports
-- `reports/<TECHNICAL_REPORT>`: full methods and analysis, for reproducing the work
-- `reports/<EXECUTIVE_BRIEF>`: short, non-technical summary for hosts and property managers
-
 ## Requirements
 Python 3 with the following packages: pandas, numpy, scikit-learn, matplotlib, seaborn, scipy, and jupyter. The install command is in the Setup section above.
 
