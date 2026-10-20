@@ -3,36 +3,55 @@
 Predicting nightly Airbnb prices in San Diego, built for the ADS-505 (Applied Statistics for Data Science) final team project at the University of San Diego.
 
 ## Team
-
 - Andrew Hashoush
 - Cassandra Avelar
 - Kalixta Escoto
 
 ## Project overview
-
 Airbnb hosts and small property managers in San Diego often set nightly prices by instinct or by eyeballing a few nearby listings. This project builds a model that recommends a competitive, data backed nightly price from a listing's own features and location, then translates the strongest price drivers into plain recommendations a host could actually act on.
 
 **Goal:** predict nightly listing price (regression) from listing characteristics, and identify which features move price the most.
 
 ## Dataset
-
 Inside Airbnb, San Diego listings snapshot (2026). http://insideairbnb.com/get-the-data.html
 
+- The raw file is already included at `data/listings.csv.gz`, so no download is needed
 - 10,666 cleaned listings after preprocessing
 - 12 features used in modeling, including room type, neighborhood, bedrooms/bathrooms, accommodates, review scores, and superhost status
 - Target variable: `price` (nightly rate, continuous)
 
-## Methods
+## Setup
+1. Clone the repo:
+```
+   git clone https://github.com/andrewhash/ads505-team-project.git
+   cd ads505-team-project
+```
+2. Install dependencies:
+```
+   pip install pandas numpy scikit-learn matplotlib seaborn scipy jupyter
+```
 
-- Data cleaning: price field converted from text to numeric, scrape metadata and raw HTML description fields dropped, missing review/host response values handled
-- Train/validation/test split: 60/20/20
-- Baseline model: linear regression
-- Final model: random forest (100 trees, tuned on the validation set)
-- Hypothesis testing: Welch's t-test on the superhost price premium
+## How to run
+Launch Jupyter from the project root so the notebooks can find the `data/` folder:
+```
+jupyter notebook
+```
+Then open the notebooks in order and run all cells (Kernel > Restart & Run All):
+
+1. `notebooks/<NOTEBOOK_1>.ipynb`: loads `data/listings.csv.gz`, converts price to numeric, drops scrape metadata and HTML fields, and handles missing values
+2. `notebooks/<NOTEBOOK_2>.ipynb`: splits the data 60/20/20, trains the linear regression baseline and the random forest, runs the Welch's t-test, and reports final metrics on the test set
+
+Your results should match the table in the Results section.
+
+## Methods
+- **Data cleaning:** price converted from text to numeric, scrape metadata and raw HTML description fields dropped, missing review/host response values handled
+- **Train/validation/test split:** 60/20/20
+- **Baseline model:** linear regression
+- **Final model:** random forest (100 trees, tuned on the validation set)
+- **Hypothesis testing:** Welch's t-test on the superhost price premium
 - Final metrics reported once, on the held out test set
 
 ## Results
-
 | Model | R² | MAE | RMSE |
 |---|---|---|---|
 | Linear regression (baseline) | 0.593 | $103.73 | $144.92 |
@@ -40,17 +59,16 @@ Inside Airbnb, San Diego listings snapshot (2026). http://insideairbnb.com/get-t
 
 Superhost listings averaged $382.51/night vs. $311.70 for non-superhosts (Welch's t-test, t = 15.81, p < .001).
 
-The random forest model was selected as the final model: it explains about 68% of price variation and cuts average pricing error by roughly 14% versus the linear regression baseline.
+The random forest was selected as the final model. It explains about 68% of price variation and cuts average pricing error by roughly 14% compared to the linear regression baseline.
 
 ## Reports
-
-- Technical report: for reproducing the analysis
-- Executive brief: a short, non-technical summary for hosts/property managers
+- `reports/<TECHNICAL_REPORT>`: full methods and analysis, for reproducing the work
+- `reports/<EXECUTIVE_BRIEF>`: short, non-technical summary for hosts and property managers
 
 ## Requirements
+Python 3 with the following packages: pandas, numpy, scikit-learn, matplotlib, seaborn, scipy, and jupyter. The install command is in the Setup section above.
 
-Python 3, pandas, numpy, scikit-learn, matplotlib/seaborn, scipy.
-
-\`\`\`
-pip install -r requirements.txt
-\`\`\`
+## Team contributions
+- **Andrew Hashoush:** exploratory data analysis (EDA)
+- **Cassandra Avelar:** modeling (linear regression baseline and random forest)
+- **Kalixta Escoto:** hypothesis testing and final metrics
